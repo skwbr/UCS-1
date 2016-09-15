@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -100,15 +100,9 @@ namespace UCS.Files.CSV
             return CSVColumn.GetArraySize(currentOffset, nextOffset);
         }
 
-        public int GetColumnIndexByName(string name)
-        {
-            return m_vColumnHeaders.IndexOf(name);
-        }
+        public int GetColumnIndexByName(string name) => m_vColumnHeaders.IndexOf(name);
 
-        public string GetColumnName(int index)
-        {
-            return m_vColumnHeaders[index];
-        }
+        public string GetColumnName(int index) => m_vColumnHeaders[index];
 
         public int GetColumnRowCount()
         {
@@ -118,15 +112,9 @@ namespace UCS.Files.CSV
             return result;
         }
 
-        public CSVRow GetRowAt(int index)
-        {
-            return m_vCSVRows[index];
-        }
+        public CSVRow GetRowAt(int index) => m_vCSVRows[index];
 
-        public int GetRowCount()
-        {
-            return m_vCSVRows.Count;
-        }
+        public int GetRowCount() => m_vCSVRows.Count;
 
         public string GetValue(string name, int level)
         {
@@ -134,10 +122,7 @@ namespace UCS.Files.CSV
             return GetValueAt(index, level);
         }
 
-        public string GetValueAt(int column, int row)
-        {
-            return m_vCSVColumns[column].Get(row);
-        }
+        public string GetValueAt(int column, int row) => m_vCSVColumns[column].Get(row);
 
         #endregion Public Methods
     }
