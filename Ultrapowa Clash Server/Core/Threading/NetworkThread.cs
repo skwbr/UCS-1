@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -25,18 +25,6 @@ namespace UCS.Core.Threading
 
         #endregion Private Properties
 
-        #region Public Fields
-
-        public static string Author = "ExPl0itR";
-
-        public static string Description = "Includes the Core (PacketManager etc.)";
-
-        public static string Name = "Network Thread";
-
-        public static string Version = "1.0.0";
-
-        #endregion Public Fields
-
         #region Public Methods
 
         public static void Start()
@@ -49,8 +37,6 @@ namespace UCS.Core.Threading
                 new ResourcesManager();
                 new ObjectManager();
                 new Gateway().Start();
-                //new HTTP(Convert.ToInt32(ConfigurationManager.AppSettings["DebugPort"]));
-                //new UCSList();
             });
             T.Start();
         }
