@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -35,10 +35,7 @@ namespace UCS.Logic
 
         #region Public Methods
 
-        public TrapData GetTrapData()
-        {
-            return (TrapData) GetData();
-        }
+        public TrapData GetTrapData() => (TrapData)GetData();
 
         #endregion Public Methods
     }
