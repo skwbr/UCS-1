@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -322,30 +322,15 @@ namespace UCS.Files.Logic
 
         #region Public Methods
 
-        public ResourceData GetAltBuildResource(int level)
-        {
-            return ObjectManager.DataTables.GetResourceByName(AltBuildResource[level]);
-        }
+        public ResourceData GetAltBuildResource(int level) => ObjectManager.DataTables.GetResourceByName(AltBuildResource[level]);
 
-        public override int GetBuildCost(int level)
-        {
-            return BuildCost[level];
-        }
+        public override int GetBuildCost(int level) => BuildCost[level];
 
-        public string GetBuildingClass()
-        {
-            return BuildingClass;
-        }
+        public string GetBuildingClass() => BuildingClass;
 
-        public override ResourceData GetBuildResource(int level)
-        {
-            return ObjectManager.DataTables.GetResourceByName(BuildResource[level]);
-        }
+        public override ResourceData GetBuildResource(int level) => ObjectManager.DataTables.GetResourceByName(BuildResource[level]);
 
-        public override int GetConstructionTime(int level)
-        {
-            return BuildTimeS[level] + BuildTimeM[level] * 60 + BuildTimeH[level] * 60 * 60 + BuildTimeD[level] * 60 * 60 * 24;
-        }
+        public override int GetConstructionTime(int level) => BuildTimeS[level] + BuildTimeM[level] * 60 + BuildTimeH[level] * 60 * 60 + BuildTimeD[level] * 60 * 60 * 24;
 
         public List<int> GetMaxStoredResourceCounts(int level)
         {
@@ -366,41 +351,19 @@ namespace UCS.Files.Logic
             return maxStoredResourceCounts;
         }
 
-        public override int GetRequiredTownHallLevel(int level)
-        {
-            return TownHallLevel[level] - 1;
-            //-1 à ajouter obligatoirement (checké il est retranché au moment de l'init client)
-        }
+        public override int GetRequiredTownHallLevel(int level) => TownHallLevel[level] - 1;
 
-        public int GetUnitProduction(int level)
-        {
-            return UnitProduction[level];
-        }
+        public int GetUnitProduction(int level) => UnitProduction[level];
 
-        public int GetUnitStorageCapacity(int level)
-        {
-            return HousingSpace[level];
-        }
+        public int GetUnitStorageCapacity(int level) => HousingSpace[level];
 
-        public override int GetUpgradeLevelCount()
-        {
-            return BuildCost.Count;
-        }
+        public override int GetUpgradeLevelCount() => BuildCost.Count;
 
-        public bool IsSpellForge()
-        {
-            return ForgesSpells;
-        }
+        public bool IsSpellForge() => ForgesSpells || ForgesMiniSpells;
 
-        public override bool IsTownHall()
-        {
-            return BuildingClass == "Town Hall";
-        }
+        public override bool IsTownHall() => BuildingClass == "Town Hall";
 
-        public bool IsWorkerBuilding()
-        {
-            return BuildingClass == "Worker";
-        }
+        public bool IsWorkerBuilding() => BuildingClass == "Worker";
 
         #endregion Public Methods
     }
