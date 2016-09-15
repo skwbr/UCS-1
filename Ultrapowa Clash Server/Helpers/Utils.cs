@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -70,15 +70,9 @@ namespace UCS.Helpers
             }
         }
 
-        public static void AddInt32(this List<byte> list, int data)
-        {
-            list.AddRange(BitConverter.GetBytes(data).Reverse());
-        }
+        public static void AddInt32(this List<byte> list, int data) => list.AddRange(BitConverter.GetBytes(data).Reverse());
 
-        public static void AddInt64(this List<byte> list, long data)
-        {
-            list.AddRange(BitConverter.GetBytes(data).Reverse());
-        }
+        public static void AddInt64(this List<byte> list, long data) => list.AddRange(BitConverter.GetBytes(data).Reverse());
 
         public static void AddString(this List<byte> list, string data)
         {
@@ -107,20 +101,6 @@ namespace UCS.Helpers
 
         public static void Increment(this byte[] nonce, int timesToIncrease = 2)
         {
-            /*
-            int __cdecl sodium_increment(unsigned char nonce, unsigned int nonceLength)
-            {
-                __int64 v2 = 1i64; // rax@1
-                do
-                {
-                     LODWORD(v2) = *(_BYTE *)(HIDWORD(v2) + a1) + (_DWORD)v2;
-                     *(_BYTE *)(HIDWORD(v2)++ + a1) = v2;
-                     LODWORD(v2) = (unsigned int)v2 >> 8;
-                }
-                while ( HIDWORD(v2) < a2 );
-             return v2;
-            }
-            */
             for (int j = 0; j < timesToIncrease; j++)
             {
                 ushort c = 1;
@@ -132,15 +112,9 @@ namespace UCS.Helpers
                 }
             }
         }
-        public static int ParseConfigInt(string str)
-        {
-            return int.Parse(ConfigurationManager.AppSettings[str]);
-        }
+        public static int ParseConfigInt(string str) => int.Parse(ConfigurationManager.AppSettings[str]);
 
-        public static string parseConfigString(string str)
-        {
-            return ConfigurationManager.AppSettings[str];
-        }
+        public static string parseConfigString(string str) => ConfigurationManager.AppSettings[str];
 
         public static byte[] ReadAllBytes(this BinaryReader br)
         {
@@ -155,11 +129,7 @@ namespace UCS.Helpers
             }
         }
 
-        public static Data ReadDataReference(this BinaryReader br)
-        {
-            var id = br.ReadInt32WithEndian();
-            return ObjectManager.DataTables.GetDataById(id);
-        }
+        public static Data ReadDataReference(this BinaryReader br) => ObjectManager.DataTables.GetDataById(br.ReadInt32WithEndian());
 
         public static int ReadInt32WithEndian(this BinaryReader br)
         {
