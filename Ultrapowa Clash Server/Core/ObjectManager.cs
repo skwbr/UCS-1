@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -41,17 +41,14 @@ namespace UCS.Core
             DataTables = new DataTables();
             m_vAlliances = new Dictionary<long, Alliance>();
             LoadFingerPrint();
-
             using (var sr = new StreamReader(@"Gamefiles/starting_home.json"))
                 m_vHomeDefault = sr.ReadToEnd();
-
             m_vDatabase.CheckConnection();
             m_vAvatarSeed = m_vDatabase.GetMaxPlayerId() + 1;
             m_vAllianceSeed = m_vDatabase.GetMaxAllianceId() + 1;
             LoadGameFiles();
             LoadNpcLevels();
             GetAllAlliancesFromDB();
-            
             var TimerItem = new Timer(Save, null, 30000, 30000);
             new Timer(Restart, null, 10800000, 0);
             TimerReference = TimerItem;
@@ -112,16 +109,13 @@ namespace UCS.Core
 
         public bool m_vTimerCanceled;
         public Timer TimerReference;
-
         static readonly object m_vDatabaseLock = new object();
         static Dictionary<long, Alliance> m_vAlliances;
         static long m_vAllianceSeed;
         static long m_vAvatarSeed;
-        static string[] m_vBannedIPs;
         static DatabaseManager m_vDatabase;
         static string m_vHomeDefault;
         static Random m_vRandomSeed;
-
         public static DataTables DataTables { get; set; }
         public static FingerPrint FingerPrint { get; set; }
         public static Dictionary<int, string> NpcLevels { get; set; }
@@ -258,8 +252,7 @@ namespace UCS.Core
                 gameFiles.Add(new Tuple<string, string, int>("Buildings", @"Gamefiles/logic/buildings.csv", 0));
                 gameFiles.Add(new Tuple<string, string, int>("Characters", @"Gamefiles/logic/characters.csv", 3));
                 gameFiles.Add(new Tuple<string, string, int>("Decos", @"Gamefiles/logic/decos.csv", 17));
-                gameFiles.Add(new Tuple<string, string, int>("Experience Levels", @"Gamefiles/logic/experience_levels.csv",
-                    10));
+                gameFiles.Add(new Tuple<string, string, int>("Experience Levels", @"Gamefiles/logic/experience_levels.csv", 10));
                 gameFiles.Add(new Tuple<string, string, int>("Globals", @"Gamefiles/logic/globals.csv", 13));
                 gameFiles.Add(new Tuple<string, string, int>("Heroes", @"Gamefiles/logic/heroes.csv", 27));
                 gameFiles.Add(new Tuple<string, string, int>("Leagues", @"Gamefiles/logic/leagues.csv", 12));
@@ -333,10 +326,7 @@ namespace UCS.Core
         ///     This function return all in-memory alliances.
         /// </summary>
         /// <returns>All alliances in-memory</returns>
-        public static void RemoveInMemoryAlliance(long id)
-        {
-            m_vAlliances.Remove(id);
-        }
+        public static void RemoveInMemoryAlliance(long id) => m_vAlliances.Remove(id);
 
         /// <summary>
         ///     This function dispose the class.
