@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -77,15 +77,9 @@ namespace UCS.Core
             return percentFree.ToString("##.##");
         }
 
-        public static string GetFreeMemoryMB()
-        {
-            return PerformanceInfo.GetPhysicalAvailableMemoryInMiB().ToString();
-        }
+        public static string GetFreeMemoryMB() => PerformanceInfo.GetPhysicalAvailableMemoryInMiB().ToString();
 
-        public static string GetTotalMemory()
-        {
-            return PerformanceInfo.GetTotalMemoryInMiB().ToString();
-        }
+        public static string GetTotalMemory() => PerformanceInfo.GetTotalMemoryInMiB().ToString();
 
         public static string GetUsedMemory()
         {
