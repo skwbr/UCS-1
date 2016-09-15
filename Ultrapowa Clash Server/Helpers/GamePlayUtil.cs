@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -19,27 +19,17 @@ namespace UCS.Helpers
     {
         #region Public Methods
 
-        public static int CalculateResourceCost(int sup, int inf, int supCost, int infCost, int amount)
-        {
-            return (int) Math.Round((supCost - infCost) * (long) (amount - inf) / (sup - inf * 1.0)) + infCost;
-        }
+        public static int CalculateResourceCost(int sup, int inf, int supCost, int infCost, int amount) => 
+            (int)Math.Round((supCost - infCost) * (long)(amount - inf) / (sup - inf * 1.0)) + infCost;
 
-        public static int CalculateSpeedUpCost(int sup, int inf, int supCost, int infCost, int amount)
-        {
-            return (int) Math.Round((supCost - infCost) * (long) (amount - inf) / (sup - inf * 1.0)) + infCost;
-        }
+        public static int CalculateSpeedUpCost(int sup, int inf, int supCost, int infCost, int amount) => 
+            (int)Math.Round((supCost - infCost) * (long)(amount - inf) / (sup - inf * 1.0)) + infCost;
 
-        public static int GetResourceDiamondCost(int resourceCount, ResourceData resourceData)
-        {
-            var globals = ObjectManager.DataTables.GetGlobals();
-            return Globals.GetResourceDiamondCost(resourceCount, resourceData);
-        }
+        public static int GetResourceDiamondCost(int resourceCount, ResourceData resourceData) => 
+            Globals.GetResourceDiamondCost(resourceCount, resourceData);
 
-        public static int GetSpeedUpCost(int seconds)
-        {
-            var globals = ObjectManager.DataTables.GetGlobals();
-            return Globals.GetSpeedUpCost(seconds);
-        }
+        public static int GetSpeedUpCost(int seconds) => 
+            Globals.GetSpeedUpCost(seconds);
 
         #endregion Public Methods
     }
