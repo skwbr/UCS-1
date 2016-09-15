@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -26,7 +26,6 @@ namespace UCS.Core
         public MessageManager()
         {
             m_vPackets = new ConcurrentQueue<Message>();
-            m_vIsRunning = false;
         }
 
         #endregion Public Constructors
@@ -38,7 +37,7 @@ namespace UCS.Core
         /// </summary>
         void PacketProcessing()
         {
-            while (m_vIsRunning)
+            while (true)
             {
                 m_vWaitHandle.WaitOne();
 
@@ -52,18 +51,11 @@ namespace UCS.Core
                                   ")";
                     try
                     {
-                        //Debugger.WriteLine("[UCS]    Processing " + p.GetType().Name + player);
                         p.Decode();
                         p.Process(pl);
                     }
                     catch (Exception ex)
                     {
-                        //Console.ForegroundColor = ConsoleColor.Red;
-                        //Debugger.WriteLine(
-                        // "[UCS]    An exception occured during processing of message " + p.GetType().Name + player,
-                        // ex);
-                        //Console.WriteLine("Error processing message" + p.GetType().Name + player, ex);
-                     //Console.ResetColor();
                     }
                 }
             }
@@ -81,7 +73,6 @@ namespace UCS.Core
 
         static readonly EventWaitHandle m_vWaitHandle = new AutoResetEvent(false);
         static ConcurrentQueue<Message> m_vPackets;
-        bool m_vIsRunning;
 
         #endregion Private Fields
 
@@ -104,7 +95,6 @@ namespace UCS.Core
         {
             PacketProcessingDelegate packetProcessing = PacketProcessing;
             packetProcessing.BeginInvoke(null, null);
-            m_vIsRunning = true;
             Console.WriteLine("[UCS]    Message manager has been successfully started !");
         }
 
