@@ -455,7 +455,7 @@ namespace UCS.Core
             }
             catch (EntityException)
             {
-                if (ConfigurationManager.AppSettings["databaseConnectionName"] == "ucsdbEntities")
+                if (ConfigurationManager.AppSettings["databaseConnectionName"] == "mysql")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("[UCS]    An exception occured when connecting to the MySQL Server.");
