@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -21,8 +21,6 @@ namespace UCS.Core.Network
 {
     internal class Gateway
     {
-        IPAddress IPAddress;
-
         public static Socket Socket { get; set; }
 
         public static ManualResetEvent allDone = new ManualResetEvent(false);
@@ -36,7 +34,7 @@ namespace UCS.Core.Network
                 {
                     Socket.Bind(new IPEndPoint(IPAddress.Any, port));
                     Socket.Listen(1000);
-                    Console.WriteLine("[UCS]    Gateway started on port " + port);
+                    Console.WriteLine("[UCS]    Gateway started on Port " + port);
                     Console.WriteLine("[UCS]    Server started succesfully! Let's Play Clash of Clans!");
                     while (true)
                     {
@@ -101,10 +99,8 @@ namespace UCS.Core.Network
 
         public Socket Socket { get; }
 
-        public static SocketRead Begin(Socket socket, IncomingReadHandler readHandler, IncomingReadErrorHandler errorHandler = null)
-        {
-            return new SocketRead(socket, readHandler, errorHandler);
-        }
+        public static SocketRead Begin(Socket socket, IncomingReadHandler readHandler, IncomingReadErrorHandler errorHandler = null) 
+            => new SocketRead(socket, readHandler, errorHandler);
 
         readonly byte[] _buffer = new byte[1024];
 
