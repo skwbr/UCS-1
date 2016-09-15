@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -71,10 +71,7 @@ namespace UCS.Logic
             return result;
         }
 
-        public DateTime GetStartTime()
-        {
-            return m_vStartTime;
-        }
+        public DateTime GetStartTime() => m_vStartTime;
 
         public void StartTimer(int seconds, DateTime time)
         {
