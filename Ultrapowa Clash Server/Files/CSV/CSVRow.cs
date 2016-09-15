@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -42,20 +42,11 @@ namespace UCS.Files.CSV
             return result;
         }
 
-        public string GetName()
-        {
-            return m_vCSVTable.GetValueAt(0, m_vRowStart);
-        }
+        public string GetName() => m_vCSVTable.GetValueAt(0, m_vRowStart);
 
-        public int GetRowOffset()
-        {
-            return m_vRowStart;
-        }
+        public int GetRowOffset() => m_vRowStart;
 
-        public string GetValue(string name, int level)
-        {
-            return m_vCSVTable.GetValue(name, level + m_vRowStart);
-        }
+        public string GetValue(string name, int level) => m_vCSVTable.GetValue(name, level + m_vRowStart);
 
         #endregion Public Methods
     }
