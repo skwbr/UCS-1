@@ -65,98 +65,45 @@ namespace UCS.Logic
 
         #region Public Methods
 
-        public byte GetAccountPrivileges()
-        {
-            return m_vAccountPrivileges;
-        }
+        public byte GetAccountPrivileges() => m_vAccountPrivileges;
 
-        public bool Banned()
-        {
-            if (m_vAccountStatus == 99)
-                return true;
-            return false;
-        }
+        public bool Banned() => m_vAccountStatus > 99;
 
-        public byte GetAccountStatus()
-        {
-            return m_vAccountStatus;
-        }
+        public byte GetAccountStatus() => m_vAccountStatus;
 
-        public Client GetClient()
-        {
-            return m_vClient;
-        }
+        public Client GetClient() => m_vClient;
 
-        public ComponentManager GetComponentManager()
-        {
-            return GameObjectManager.GetComponentManager();
-        }
+        public ComponentManager GetComponentManager() => GameObjectManager.GetComponentManager();
 
-        public ClientAvatar GetHomeOwnerAvatar()
-        {
-            return m_vClientAvatar;
-        }
+        public ClientAvatar GetHomeOwnerAvatar() => m_vClientAvatar;
 
-        public string GetIPAddress()
-        {
-            return m_vIPAddress;
-        }
+        public string GetIPAddress() => m_vIPAddress;
 
-        public ClientAvatar GetPlayerAvatar()
-        {
-            return m_vClientAvatar;
-        }
+        public ClientAvatar GetPlayerAvatar() => m_vClientAvatar;
 
-        public DateTime GetTime()
-        {
-            return m_vTime;
-        }
+        public DateTime GetTime() => m_vTime;
 
-        public bool HasFreeWorkers()
-        {
-            return WorkerManager.GetFreeWorkers() > 0;
-        }
+        public bool HasFreeWorkers() => WorkerManager.GetFreeWorkers() > 0;
 
         public void LoadFromJSON(string jsonString)
         {
-            var jsonObject = JObject.Parse(jsonString);
+            JObject jsonObject = JObject.Parse(jsonString);
             GameObjectManager.Load(jsonObject);
         }
 
-        public string SaveToJSON()
-        {
-            return JsonConvert.SerializeObject(GameObjectManager.Save());
-        }
+        public string SaveToJSON() => JsonConvert.SerializeObject(GameObjectManager.Save(), Formatting.Indented);
 
-        public void SetAccountPrivileges(byte privileges)
-        {
-            m_vAccountPrivileges = privileges;
-        }
+        public void SetAccountPrivileges(byte privileges) => m_vAccountPrivileges = privileges;
 
-        public void SetAccountStatus(byte status)
-        {
-            m_vAccountStatus = status;
-        }
+        public void SetAccountStatus(byte status) => m_vAccountStatus = status;
 
-        public void SetClient(Client client)
-        {
-            m_vClient = client;
-        }
+        public void SetClient(Client client) => m_vClient = client;
 
-        public void SetHome(string jsonHome)
-        {
-            GameObjectManager.Load(JObject.Parse(jsonHome));
-        }
+        public void SetHome(string jsonHome) => GameObjectManager.Load(JObject.Parse(jsonHome));
 
-        public void SetIPAddress(string IP)
-        {
-            m_vIPAddress = IP;
-        }
+        public void SetIPAddress(string IP) => m_vIPAddress = IP;
 
-        public void SetTime(DateTime t)
-        {
-            m_vTime = t;
-        }
+        public void SetTime(DateTime t) => m_vTime = t;
 
         public void Tick()
         {
