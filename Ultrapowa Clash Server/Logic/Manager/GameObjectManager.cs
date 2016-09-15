@@ -288,14 +288,12 @@ namespace UCS.Logic.Manager
             jsonData.Add("last_league_rank", 2);
             jsonData.Add("last_league_shuffle", 1);
             jsonData.Add("last_season_seen", 1);
-            jsonData.Add("last_news_seen", 99);
+            jsonData.Add("last_news_seen", 999);
             jsonData.Add("edit_mode_shown", true);
             jsonData.Add("war_tutorials_seen", 1);
             jsonData.Add("war_base", true);
             jsonData.Add("help_opened", true);
             jsonData.Add("bool_layout_edit_shown_erase", false);
-
-            //m_vObstacleManager.Save(jsonData);
 
             return jsonData;
         }
