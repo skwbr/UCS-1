@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -60,10 +60,7 @@ namespace UCS.Helpers
         /// <param name="offset">The zero-based index at which to begin reading data.</param>
         /// <param name="count">The number of bytes to read.</param>
         /// <returns>The number of byte read.</returns>
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            return BaseStream.Read(buffer, 0, count);
-        }
+        public override int Read(byte[] buffer, int offset, int count) => BaseStream.Read(buffer, 0, count);
 
         /// <summary>
         ///     Reads a <see cref="bool" /> from the underlying stream.
@@ -89,10 +86,7 @@ namespace UCS.Helpers
         ///     Reads a <see cref="byte" /> from the underlying stream.
         /// </summary>
         /// <returns><see cref="byte" /> read.</returns>
-        public override byte ReadByte()
-        {
-            return (byte) BaseStream.ReadByte();
-        }
+        public override byte ReadByte() => (byte)BaseStream.ReadByte();
 
         /// <summary>
         ///     Reads an array of <see cref="byte" /> from the underlying stream.
@@ -116,10 +110,7 @@ namespace UCS.Helpers
         ///     Reads an <see cref="short" /> from the underlying stream.
         /// </summary>
         /// <returns><see cref="short" /> read.</returns>
-        public override short ReadInt16()
-        {
-            return (short) ReadUInt16();
-        }
+        public override short ReadInt16() => (short)ReadUInt16();
 
         /// <summary>
         ///     Reads a 3 bytes long int. Clash of Clans packets uses this to encode there length.
@@ -135,19 +126,13 @@ namespace UCS.Helpers
         ///     Reads an <see cref="int" /> from the underlying stream.
         /// </summary>
         /// <returns><see cref="int" /> read.</returns>
-        public override int ReadInt32()
-        {
-            return (int) ReadUInt32();
-        }
+        public override int ReadInt32() => (int)ReadUInt32();
 
         /// <summary>
         ///     Reads an <see cref="long" /> from the underlying stream.
         /// </summary>
         /// <returns><see cref="long" /> read.</returns>
-        public override long ReadInt64()
-        {
-            return (long) ReadUInt64();
-        }
+        public override long ReadInt64() => (long)ReadUInt64();
 
         /// <summary>
         ///     Reads a <see cref="string" /> from the underlying stream.
@@ -181,10 +166,7 @@ namespace UCS.Helpers
         ///     Reads a 3 bytes long uint.
         /// </summary>
         /// <returns>3 bytes int.</returns>
-        public uint ReadUInt24()
-        {
-            return (uint) ReadInt24();
-        }
+        public uint ReadUInt24() => (uint)ReadInt24();
 
         /// <summary>
         ///     Reads a <see cref="uint" /> from the underlying stream.
@@ -215,10 +197,7 @@ namespace UCS.Helpers
         ///     the new position.
         /// </param>
         /// <returns>The new position of the underlying stream.</returns>
-        public long Seek(long offset, SeekOrigin origin)
-        {
-            return BaseStream.Seek(offset, origin);
-        }
+        public long Seek(long offset, SeekOrigin origin) => BaseStream.Seek(offset, origin);
 
         #endregion Public Methods
     }
