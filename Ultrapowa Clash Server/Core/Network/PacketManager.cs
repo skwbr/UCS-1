@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -24,13 +24,11 @@ namespace UCS.Core.Network
         private static readonly EventWaitHandle m_vOutgoingWaitHandle = (EventWaitHandle)new AutoResetEvent(false);
         private static ConcurrentQueue<Message> m_vIncomingPackets;
         private static ConcurrentQueue<Message> m_vOutgoingPackets;
-        private bool m_vIsRunning;
 
         public PacketManager()
         {
             PacketManager.m_vIncomingPackets = new ConcurrentQueue<Message>();
             PacketManager.m_vOutgoingPackets = new ConcurrentQueue<Message>();
-            this.m_vIsRunning = false;
         }
 
         public void Dispose()
@@ -67,13 +65,12 @@ namespace UCS.Core.Network
         {
             new PacketManager.IncomingProcessingDelegate(this.IncomingProcessing).BeginInvoke((AsyncCallback)null, (object)null);
             new PacketManager.OutgoingProcessingDelegate(this.OutgoingProcessing).BeginInvoke((AsyncCallback)null, (object)null);
-            this.m_vIsRunning = true;
             Console.WriteLine("[UCS]    Packet Manager started successfully");
         }
 
         private void IncomingProcessing()
         {
-            while (this.m_vIsRunning)
+            while (true)
             {
                 PacketManager.m_vIncomingWaitHandle.WaitOne();
                 Message result;
@@ -88,7 +85,7 @@ namespace UCS.Core.Network
 
         private void OutgoingProcessing()
         {
-            while (this.m_vIsRunning)
+            while (true)
             {
                 PacketManager.m_vOutgoingWaitHandle.WaitOne();
                 Message result;
@@ -117,8 +114,8 @@ namespace UCS.Core.Network
             }
         }
 
-        private delegate void IncomingProcessingDelegate();
+        delegate void IncomingProcessingDelegate();
 
-        private delegate void OutgoingProcessingDelegate();
+        delegate void OutgoingProcessingDelegate();
     }
 }
