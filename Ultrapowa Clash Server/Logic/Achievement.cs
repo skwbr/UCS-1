@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -36,10 +36,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public int Id
-        {
-            get { return m_vType + Index; }
-        }
+        public int Id => m_vType + Index;
 
         public int Index { get; set; }
         public string Name { get; set; }
