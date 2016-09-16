@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -40,10 +40,7 @@ namespace UCS.Logic.Manager
 
         #region Public Methods
 
-        public void AddComponent(Component c)
-        {
-            m_vComponents[c.Type].Add(c);
-        }
+        public void AddComponent(Component c) => m_vComponents[c.Type].Add(c);
 
         public Component GetClosestComponent(int x, int y, ComponentFilter cf)
         {
@@ -68,10 +65,7 @@ namespace UCS.Logic.Manager
             return result;
         }
 
-        public List<Component> GetComponents(int type)
-        {
-            return m_vComponents[type];
-        }
+        public List<Component> GetComponents(int type) => m_vComponents[type];
 
         public int GetMaxBarrackLevel()
         {
