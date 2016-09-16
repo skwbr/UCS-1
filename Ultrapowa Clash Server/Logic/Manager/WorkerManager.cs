@@ -15,7 +15,9 @@ namespace UCS.Logic.Manager
 {
     internal class WorkerManager
     {
-        #region Public Constructors
+        readonly List<GameObject> m_vGameObjectReferences;
+       
+        int m_vWorkerCount;
 
         public WorkerManager()
         {
@@ -23,21 +25,7 @@ namespace UCS.Logic.Manager
             m_vWorkerCount = 0;
         }
 
-        #endregion Public Constructors
-
-        #region Private Fields
-
-        readonly List<GameObject> m_vGameObjectReferences;
-        int m_vWorkerCount;
-
-        #endregion Private Fields
-
-        #region Public Methods
-
-        public static int GetFinishTaskOfOneWorkerCost()
-        {
-            return 0;
-        }
+        public static int GetFinishTaskOfOneWorkerCost() => 0;
 
         public static void RemoveGameObjectReferences(GameObject go)
         {
@@ -59,10 +47,7 @@ namespace UCS.Logic.Manager
             }
         }
 
-        public void DecreaseWorkerCount()
-        {
-            m_vWorkerCount--;
-        }
+        public void DecreaseWorkerCount() => m_vWorkerCount--;
 
         public void FinishTaskOfOneWorker()
         {
@@ -74,7 +59,7 @@ namespace UCS.Logic.Manager
                 }
                 else
                 {
-                    var b = (ConstructionItem) go;
+                    var b = (ConstructionItem)go;
                     if (b.IsConstructing())
                         b.SpeedUpConstruction();
                     else
@@ -87,18 +72,15 @@ namespace UCS.Logic.Manager
             }
         }
 
-        public int GetFreeWorkers()
-        {
-            return m_vWorkerCount - m_vGameObjectReferences.Count;
-        }
+        public int GetFreeWorkers() => m_vWorkerCount - m_vGameObjectReferences.Count;
 
         public GameObject GetShortestTaskGO()
         {
             GameObject shortestTaskGO = null;
-            var shortestGOTime = 0;
+            int shortestGOTime = 0;
             int currentGOTime;
 
-            foreach (var go in m_vGameObjectReferences)
+            foreach (GameObject go in m_vGameObjectReferences)
             {
                 currentGOTime = -1;
                 if (go.ClassId == 3)
@@ -106,7 +88,7 @@ namespace UCS.Logic.Manager
                 }
                 else
                 {
-                    var c = (ConstructionItem) go;
+                    var c = (ConstructionItem)go;
                     if (c.IsConstructing())
                     {
                         currentGOTime = c.GetRemainingConstructionTime();
@@ -143,16 +125,8 @@ namespace UCS.Logic.Manager
             return shortestTaskGO;
         }
 
-        public int GetTotalWorkers()
-        {
-            return m_vWorkerCount;
-        }
+        public int GetTotalWorkers() => m_vWorkerCount;
 
-        public void IncreaseWorkerCount()
-        {
-            m_vWorkerCount++;
-        }
-
-        #endregion Public Methods
+        public void IncreaseWorkerCount() => m_vWorkerCount++;
     }
 }
