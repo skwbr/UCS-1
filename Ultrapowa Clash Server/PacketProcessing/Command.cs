@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -30,10 +30,7 @@ namespace UCS.PacketProcessing
 
         #region Public Methods
 
-        public virtual byte[] Encode()
-        {
-            return new List<byte>().ToArray();
-        }
+        public virtual byte[] Encode() => new List<byte>().ToArray();
 
         public virtual void Execute(Level level)
         {
