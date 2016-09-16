@@ -25,6 +25,7 @@ namespace UCS.Core.Threading
     {
         #region Private Fields
         static string Command;
+        static string Title, Ta;
 
         #endregion Private Fields
 
@@ -40,7 +41,13 @@ namespace UCS.Core.Threading
         {
             T = new Thread(() =>
             {
-                Title = VersionTitle;
+                Title = "Ultrapowa Clash Server v0.7.1.0 - © 2016";
+                foreach (char t in Title)
+                {
+                    Ta += t;
+                    Console.Title = Ta;
+                    Thread.Sleep(20);
+                }
                 ForegroundColor = ConsoleColor.Red;
                 WriteLine(
                     @"
