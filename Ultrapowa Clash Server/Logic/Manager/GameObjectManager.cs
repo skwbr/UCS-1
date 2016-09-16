@@ -68,6 +68,8 @@ namespace UCS.Logic.Manager
         public GameObject GetGameObjectByID(int id)
         {
             var classId = GlobalID.GetClassID(id) - 500;
+            if (m_vGameObjects.Capacity < classId)
+            return null;
             return m_vGameObjects[classId].Find(g => g.GlobalId == id);
         }
 
