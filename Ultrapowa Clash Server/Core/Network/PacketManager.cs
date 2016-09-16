@@ -33,38 +33,37 @@ namespace UCS.Core.Network
 
         public void Dispose()
         {
-            PacketManager.m_vIncomingWaitHandle.Dispose();
+            m_vIncomingWaitHandle.Dispose();
+            m_vOutgoingWaitHandle.Dispose();
             GC.SuppressFinalize((object)this);
-            PacketManager.m_vOutgoingWaitHandle.Dispose();
         }
 
         public static void ProcessIncomingPacket(Message p)
         {
-            PacketManager.m_vIncomingPackets.Enqueue(p);
-            PacketManager.m_vIncomingWaitHandle.Set();
+            m_vIncomingPackets.Enqueue(p);
+            m_vIncomingWaitHandle.Set();
         }
 
         public static void ProcessOutgoingPacket(Message p)
         {
-            p.Encode();
             try
             {
-                Level level = p.Client.GetLevel();
-                string str = "";
-                if (level != null)
-                    str = " (" + (object)level.GetPlayerAvatar().GetId() + ", " + level.GetPlayerAvatar().GetAvatarName() + ")";
-                PacketManager.m_vOutgoingPackets.Enqueue(p);
-                PacketManager.m_vOutgoingWaitHandle.Set();
+                p.Encode();
+                p.Process(p.Client.GetLevel());
+                m_vOutgoingPackets.Enqueue(p);
+                m_vOutgoingWaitHandle.Set();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
 
         public void Start()
         {
-            new PacketManager.IncomingProcessingDelegate(this.IncomingProcessing).BeginInvoke((AsyncCallback)null, (object)null);
-            new PacketManager.OutgoingProcessingDelegate(this.OutgoingProcessing).BeginInvoke((AsyncCallback)null, (object)null);
+            IncomingProcessingDelegate incomingProcessing = IncomingProcessing;
+            OutgoingProcessingDelegate outgoingProcessing = OutgoingProcessing;
+            incomingProcessing.BeginInvoke(null, null);
+            outgoingProcessing.BeginInvoke(null, null);
             Console.WriteLine("[UCS]    Packet Manager started successfully");
         }
 
@@ -72,7 +71,7 @@ namespace UCS.Core.Network
         {
             while (true)
             {
-                PacketManager.m_vIncomingWaitHandle.WaitOne();
+                m_vIncomingWaitHandle.WaitOne();
                 Message result;
                 while (PacketManager.m_vIncomingPackets.TryDequeue(out result))
                 {
@@ -87,9 +86,9 @@ namespace UCS.Core.Network
         {
             while (true)
             {
-                PacketManager.m_vOutgoingWaitHandle.WaitOne();
+                m_vOutgoingWaitHandle.WaitOne();
                 Message result;
-                while (PacketManager.m_vOutgoingPackets.TryDequeue(out result))
+                while (m_vOutgoingPackets.TryDequeue(out result))
                 {
                     try
                     {
