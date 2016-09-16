@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -17,8 +17,6 @@ namespace UCS.Logic.AvatarStreamEntry
 {
     internal class AvatarStreamEntry
     {
-        //private byte m_vIsRemoved;
-
         #region Public Constructors
 
         public AvatarStreamEntry()
@@ -45,7 +43,7 @@ namespace UCS.Logic.AvatarStreamEntry
         public virtual byte[] Encode()
         {
             var data = new List<byte>();
-            data.AddInt32(GetStreamEntryType()); //alliancemailstreamentry
+            data.AddInt32(GetStreamEntryType());
             data.AddInt64(m_vId);
             data.Add(1);
             data.AddInt64(m_vSenderId);
@@ -57,41 +55,20 @@ namespace UCS.Logic.AvatarStreamEntry
             return data.ToArray();
         }
 
-        public int GetAgeSeconds()
-        {
-            return (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds -
-                   (int) m_vCreationTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-        }
+        public int GetAgeSeconds() => (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds -
+        (int)m_vCreationTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
 
-        public int GetId()
-        {
-            return m_vId;
-        }
+        public int GetId() => m_vId;
 
-        public long GetSenderAvatarId()
-        {
-            return m_vSenderId;
-        }
+        public long GetSenderAvatarId() => m_vSenderId;
 
-        public int GetSenderLevel()
-        {
-            return m_vSenderLevel;
-        }
+        public int GetSenderLevel() => m_vSenderLevel;
 
-        public string GetSenderName()
-        {
-            return m_vSenderName;
-        }
+        public string GetSenderName() => m_vSenderName;
 
-        public virtual int GetStreamEntryType()
-        {
-            return -1;
-        }
+        public virtual int GetStreamEntryType() => -1;
 
-        public byte IsNew()
-        {
-            return m_vIsNew;
-        }
+        public byte IsNew() => m_vIsNew;
 
         public void SetAvatar(ClientAvatar avatar)
         {
@@ -120,11 +97,6 @@ namespace UCS.Logic.AvatarStreamEntry
         {
             m_vSenderLeagueId = id;
         }
-
-        /*public void SetRemoved(byte removed)
-        {
-            m_vIsRemoved = removed;
-        }*/
 
         public void SetSenderLevel(int level)
         {
