@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -38,10 +38,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 6; }
-        }
+        public override int Type => 6;
 
         #endregion Public Properties
 
@@ -55,15 +52,9 @@ namespace UCS.Logic
 
         #region Public Methods
 
-        public int GetCount(int resourceIndex)
-        {
-            return m_vCurrentResources[resourceIndex];
-        }
+        public int GetCount(int resourceIndex) => m_vCurrentResources[resourceIndex];
 
-        public int GetMax(int resourceIndex)
-        {
-            return m_vMaxResources[resourceIndex];
-        }
+        public int GetMax(int resourceIndex) => m_vMaxResources[resourceIndex];
 
         public void SetMaxArray(List<int> resourceCaps)
         {
