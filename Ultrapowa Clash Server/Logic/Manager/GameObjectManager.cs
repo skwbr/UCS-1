@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -32,7 +32,6 @@ namespace UCS.Logic.Manager
                 m_vGameObjectsIndex.Add(0);
             }
             m_vComponentManager = new ComponentManager(m_vLevel);
-            //m_vObstacleManager = new ObstacleManager(m_vLevel);
         }
 
         #endregion Public Constructors
@@ -44,7 +43,6 @@ namespace UCS.Logic.Manager
         readonly List<List<GameObject>> m_vGameObjects;
         readonly List<int> m_vGameObjectsIndex;
         readonly Level m_vLevel;
-        //readonly ObstacleManager m_vObstacleManager;
 
         #endregion Private Fields
 
@@ -63,15 +61,9 @@ namespace UCS.Logic.Manager
             m_vGameObjects[go.ClassId].Add(go);
         }
 
-        public List<List<GameObject>> GetAllGameObjects()
-        {
-            return m_vGameObjects;
-        }
+        public List<List<GameObject>> GetAllGameObjects() => m_vGameObjects;
 
-        public ComponentManager GetComponentManager()
-        {
-            return m_vComponentManager;
-        }
+        public ComponentManager GetComponentManager() => m_vComponentManager;
 
         public GameObject GetGameObjectByID(int id)
         {
@@ -79,10 +71,7 @@ namespace UCS.Logic.Manager
             return m_vGameObjects[classId].Find(g => g.GlobalId == id);
         }
 
-        public List<GameObject> GetGameObjects(int id)
-        {
-            return m_vGameObjects[id];
-        }
+        public List<GameObject> GetGameObjects(int id) => m_vGameObjects[id];
 
         public void Load(JObject jsonObject)
         {
@@ -94,17 +83,6 @@ namespace UCS.Logic.Manager
                 AddGameObject(b);
                 b.Load(jsonBuilding);
             }
-
-            /*
-            var jsonObstacles = (JArray)jsonObject["obstacles"];
-            foreach (JObject jsonObstacle in jsonObstacles)
-            {
-                var dd = (ObstacleData)ObjectManager.DataTables.GetDataById(jsonObstacle["data"].ToObject<int>());
-                var d = new Obstacle(dd, m_vLevel);
-                AddGameObject(d);
-                d.Load(jsonObstacle);
-            }
-            */
 
             var jsonTraps = (JArray) jsonObject["traps"];
             foreach (JObject jsonTrap in jsonTraps)
@@ -124,8 +102,6 @@ namespace UCS.Logic.Manager
                 AddGameObject(d);
                 d.Load(jsonDeco);
             }
-
-            //m_vObstacleManager.Load(jsonObject);
         }
 
         public void RemoveGameObject(GameObject go)
@@ -167,22 +143,6 @@ namespace UCS.Logic.Manager
             }
             jsonData.Add("buildings", jsonBuildingsArray);
 
-            var jsonobstaclesArray = new JArray();
-            /*
-            foreach (var go in new List<GameObject>(m_vGameObjects[3]))
-            {
-                var o = (Obstacle)go;
-                var jsonObject = new JObject();
-                if (o != null)
-                {
-                    jsonObject.Add("data", o.GetObstacleData().GetGlobalID());
-                    o.Save(jsonObject);
-                }
-                jsonobstaclesArray.Add(jsonObject);
-            }
-            */
-            jsonData.Add("obstacles", jsonobstaclesArray);
-
             var jsonTrapsArray = new JArray();
             foreach (var go in new List<GameObject>(m_vGameObjects[4]))
             {
@@ -209,58 +169,60 @@ namespace UCS.Logic.Manager
             jsonData.Add("cooldowns", cooldowns);
             var newShopBuildings = new JArray
             {
+                4,
+                0,
+                7,
+                4,
+                7,
+                4,
+                4,
+                1,
+                7,
+                8,
+                275,
+                5,
+                4,
+                4,
+                1,
+                5,
                 0,
                 0,
                 0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
+                4,
+                1,
+                4,
+                1,
+                3,
+                1,
+                1,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1
             };
             jsonData.Add("newShopBuildings", newShopBuildings);
-            var newShopTraps = new JArray { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            var newShopTraps = new JArray { 6, 6, 5, 0, 0, 5, 5, 0, 3 };
             jsonData.Add("newShopTraps", newShopTraps);
             var newShopDecos = new JArray
             {
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
+                1,
+                4,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
                 0,
                 0,
                 0,
@@ -285,7 +247,7 @@ namespace UCS.Logic.Manager
             };
             jsonData.Add("newShopDecos", newShopDecos);
             jsonData.Add("troop_req_msg", "UCS Developement Team");
-            jsonData.Add("last_league_rank", 2);
+            jsonData.Add("last_league_rank", m_vLevel.GetPlayerAvatar().GetLeagueId());
             jsonData.Add("last_league_shuffle", 1);
             jsonData.Add("last_season_seen", 1);
             jsonData.Add("last_news_seen", 999);
