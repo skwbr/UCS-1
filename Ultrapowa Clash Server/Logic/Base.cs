@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -36,7 +36,7 @@ namespace UCS.Logic
 
         public virtual void Decode(byte[] baseData)
         {
-            using (var br = new BinaryReader(new MemoryStream(baseData)))
+            using (var br = new CoCSharpPacketReader(new MemoryStream(baseData)))
             {
                 m_vUnknown1 = br.ReadInt32WithEndian();
             }
