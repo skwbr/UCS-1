@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -21,6 +21,12 @@ namespace UCS.PacketProcessing.Commands
 
         public EditVillageLayoutCommand(CoCSharpPacketReader br)
         {
+            br.ReadInt32(); 
+            br.ReadInt32(); 
+            br.ReadInt32(); 
+            br.ReadInt32(); 
+            br.ReadInt32();
+            // Not 100% Done
         }
 
         #endregion Public Constructors
