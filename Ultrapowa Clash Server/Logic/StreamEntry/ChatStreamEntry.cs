@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -28,22 +28,14 @@ namespace UCS.Logic.StreamEntry
         public override byte[] Encode()
         {
             var data = new List<byte>();
-
             data.AddRange(base.Encode());
             data.AddString(m_vMessage);
-
             return data.ToArray();
         }
 
-        public string GetMessage()
-        {
-            return m_vMessage;
-        }
+        public string GetMessage() => m_vMessage;
 
-        public override int GetStreamEntryType()
-        {
-            return 2;
-        }
+        public override int GetStreamEntryType() => 2;
 
         public override void Load(JObject jsonObject)
         {
