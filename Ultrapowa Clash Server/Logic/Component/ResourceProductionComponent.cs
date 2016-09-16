@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -25,7 +25,7 @@ namespace UCS.Logic
         {
             m_vTimeSinceLastClick = level.GetTime();
             m_vProductionResourceData =
-                ObjectManager.DataTables.GetResourceByName(((BuildingData) ci.GetData()).ProducesResource);
+            ObjectManager.DataTables.GetResourceByName(((BuildingData) ci.GetData()).ProducesResource);
             m_vResourcesPerHour = ((BuildingData) ci.GetData()).ResourcePerHour;
             m_vMaxResources = ((BuildingData) ci.GetData()).ResourceMax;
         }
@@ -34,10 +34,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 5; }
-        }
+        public override int Type => 5;
 
         #endregion Public Properties
 
@@ -70,13 +67,10 @@ namespace UCS.Logic
                 }
                 else
                 {
-                    var boostedTime = (float) span.TotalSeconds -
-                                      (float) (ci.GetLevel().GetTime() - ci.GetBoostEndTime()).TotalSeconds;
+                    var boostedTime = (float) span.TotalSeconds - (float) (ci.GetLevel().GetTime() - ci.GetBoostEndTime()).TotalSeconds;
                     var notBoostedTime = (float) span.TotalSeconds - boostedTime;
-
                     currentResources = m_vResourcesPerHour[ci.UpgradeLevel] / (60f * 60f) * notBoostedTime;
-                    currentResources += m_vResourcesPerHour[ci.UpgradeLevel] / (60f * 60f) * boostedTime *
-                                        ci.GetBoostMultipier();
+                    currentResources += m_vResourcesPerHour[ci.UpgradeLevel] / (60f * 60f) * boostedTime * ci.GetBoostMultipier();
                     ci.IsBoosted = false;
                 }
             }
@@ -91,14 +85,10 @@ namespace UCS.Logic
                     if (ca.GetResourceCap(m_vProductionResourceData) - ca.GetResourceCount(m_vProductionResourceData) <
                         currentResources)
                     {
-                        var newCurrentResources = ca.GetResourceCap(m_vProductionResourceData) -
-                                                  ca.GetResourceCount(m_vProductionResourceData);
-                        m_vTimeSinceLastClick =
-                            ci.GetLevel()
+                        var newCurrentResources = ca.GetResourceCap(m_vProductionResourceData) - ca.GetResourceCount(m_vProductionResourceData);
+                        m_vTimeSinceLastClick = ci.GetLevel()
                               .GetTime()
-                              .AddSeconds(
-                                  -((currentResources - newCurrentResources) /
-                                    (m_vResourcesPerHour[ci.UpgradeLevel] / (60f * 60f))));
+                              .AddSeconds(-((currentResources - newCurrentResources) / (m_vResourcesPerHour[ci.UpgradeLevel] / (60f * 60f))));
                         currentResources = newCurrentResources;
                     }
                     else
@@ -142,18 +132,15 @@ namespace UCS.Logic
                     }
                     else
                     {
-                        var boostedTime = seconds -
-                                          (float) (ci.GetLevel().GetTime() - ci.GetBoostEndTime()).TotalSeconds;
+                        var boostedTime = seconds - (float) (ci.GetLevel().GetTime() - ci.GetBoostEndTime()).TotalSeconds;
                         var notBoostedTime = seconds - boostedTime;
                         seconds = boostedTime * ci.GetBoostMultipier() + notBoostedTime;
                     }
                 }
-                jsonObject.Add("res_time",
-                    (int)
+                jsonObject.Add("res_time", (int)
                         (m_vMaxResources[ci.GetUpgradeLevel()] / (float) m_vResourcesPerHour[ci.GetUpgradeLevel()] * 3600f -
                          seconds));
             }
-
             return jsonObject;
         }
 
