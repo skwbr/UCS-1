@@ -20,7 +20,7 @@ using UCS.Logic.StreamEntry;
 
 namespace UCS.Logic
 {
-    class Alliance
+    internal class Alliance
     {
         #region Private Fields
 
@@ -57,7 +57,7 @@ namespace UCS.Logic
 
         public Alliance(long id)
         {
-            Random r = new Random();
+            var r = new Random();
             m_vAllianceId = id;
             m_vAllianceName = "Default";
             m_vAllianceDescription = "Default";
@@ -67,11 +67,11 @@ namespace UCS.Logic
             m_vWarFrequency = 0;
             m_vAllianceOrigin = 32000001;
             m_vScore = 0;
-            m_vAllianceExperience = r.Next(1, 5000);
+            m_vAllianceExperience = r.Next(100, 5000);
             m_vAllianceLevel = r.Next(6, 10);
-            m_vWonWars = r.Next(100, 300);
+            m_vWonWars = r.Next(200, 500);
             m_vLostWars = r.Next(100, 300);
-            m_vDrawWars = r.Next(100, 300);
+            m_vDrawWars = r.Next(100, 800);
             m_vChatMessages = new List<StreamEntry.StreamEntry>();
             m_vAllianceMembers = new Dictionary<long, AllianceMemberEntry>();
         }
@@ -91,7 +91,7 @@ namespace UCS.Logic
 
         public byte[] EncodeFullEntry()
         {
-            List<byte> data = new List<byte>();
+            var data = new List<byte>();
             data.AddInt64(m_vAllianceId);
             data.AddString(m_vAllianceName);
             data.AddInt32(m_vAllianceBadgeData);
@@ -161,8 +161,7 @@ namespace UCS.Logic
 
         public void LoadFromJSON(string jsonString)
         {
-            JObject jsonObject = JObject.Parse(jsonString);
-
+            var jsonObject = JObject.Parse(jsonString);
             m_vAllianceId = jsonObject["alliance_id"].ToObject<long>();
             m_vAllianceName = jsonObject["alliance_name"].ToObject<string>();
             m_vAllianceBadgeData = jsonObject["alliance_badge"].ToObject<int>();
@@ -177,19 +176,19 @@ namespace UCS.Logic
             m_vDrawWars = jsonObject["draw_wars"].ToObject<int>();
             m_vWarFrequency = jsonObject["war_frequency"].ToObject<int>();
             m_vAllianceOrigin = jsonObject["alliance_origin"].ToObject<int>();
-            JArray jsonMembers = (JArray)jsonObject["members"];
+            var jsonMembers = (JArray)jsonObject["members"];
             foreach (JToken jToken in jsonMembers)
             {
-                JObject jsonMember = (JObject)jToken;
+                var jsonMember = (JObject)jToken;
                 long id = jsonMember["avatar_id"].ToObject<long>();
-                Level pl = ResourcesManager.GetPlayer(id);
-                AllianceMemberEntry member = new AllianceMemberEntry(id);
+                var pl = ResourcesManager.GetPlayer(id);
+                var member = new AllianceMemberEntry(id);
                 m_vScore = m_vScore + pl.GetPlayerAvatar().GetScore();
                 member.Load(jsonMember);
                 m_vAllianceMembers.Add(id, member);
             }
             m_vScore = m_vScore / 2;
-            JArray jsonMessages = (JArray)jsonObject["chatMessages"];
+            var jsonMessages = (JArray)jsonObject["chatMessages"];
             if (jsonMessages != null)
             {
                 foreach (JToken jToken in jsonMessages)
@@ -216,7 +215,7 @@ namespace UCS.Logic
 
         public string SaveToJSON()
         {
-            JObject jsonData = new JObject();
+            var jsonData = new JObject();
             jsonData.Add("alliance_id", m_vAllianceId);
             jsonData.Add("alliance_name", m_vAllianceName);
             jsonData.Add("alliance_badge", m_vAllianceBadgeData);
@@ -232,18 +231,18 @@ namespace UCS.Logic
             jsonData.Add("draw_wars", m_vDrawWars);
             jsonData.Add("war_frequency", m_vWarFrequency);
             jsonData.Add("alliance_origin", m_vAllianceOrigin);
-            JArray jsonMembersArray = new JArray();
+            var jsonMembersArray = new JArray();
             foreach (AllianceMemberEntry member in m_vAllianceMembers.Values)
             {
-                JObject jsonObject = new JObject();
+                var jsonObject = new JObject();
                 member.Save(jsonObject);
                 jsonMembersArray.Add(jsonObject);
             }
             jsonData.Add("members", jsonMembersArray);
-            JArray jsonMessageArray = new JArray();
+            var jsonMessageArray = new JArray();
             foreach (StreamEntry.StreamEntry message in m_vChatMessages)
             {
-                JObject jsonObject = new JObject();
+                var jsonObject = new JObject();
                 message.Save(jsonObject);
                 jsonMessageArray.Add(jsonObject);
             }
