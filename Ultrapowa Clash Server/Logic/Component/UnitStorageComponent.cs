@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -37,10 +37,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 0; }
-        }
+        public override int Type => 0;
 
         #endregion Public Properties
 
@@ -101,15 +98,9 @@ namespace UCS.Logic
             return result;
         }
 
-        public int GetMaxCapacity()
-        {
-            return m_vMaxCapacity;
-        }
+        public int GetMaxCapacity() => m_vMaxCapacity;
 
-        public int GetUnitCount(int index)
-        {
-            return m_vUnits[index].Count;
-        }
+        public int GetUnitCount(int index) => m_vUnits[index].Count;
 
         public int GetUnitCountByData(CombatItemData cd)
         {
@@ -122,15 +113,9 @@ namespace UCS.Logic
             return count;
         }
 
-        public int GetUnitLevel(int index)
-        {
-            return m_vUnits[index].Level;
-        }
+        public int GetUnitLevel(int index) => m_vUnits[index].Level;
 
-        public CombatItemData GetUnitType(int index)
-        {
-            return m_vUnits[index].UnitData;
-        }
+        public CombatItemData GetUnitType(int index) => m_vUnits[index].UnitData;
 
         public int GetUnitTypeIndex(CombatItemData cd)
         {
@@ -180,12 +165,6 @@ namespace UCS.Logic
 
         public override void Load(JObject jsonObject)
         {
-            /* var UnitProdObject = jsonObject["unit_prod"];
-            if (UnitProdObject != null)
-                IsSpellForge = (int) UnitProdObject["unit_type"] == 1;
-            else
-                IsSpellForge = false; */
-
             var unitArray = (JArray) jsonObject["units"];
             if (unitArray != null)
             {
@@ -250,16 +229,6 @@ namespace UCS.Logic
                 jsonObject.Add("storage_type", 1);
             else
                 jsonObject.Add("storage_type", 0);
-
-            /*
-            var stype = new JObject();
-            if (IsSpellForge)
-                stype.Add("unit_type", 1);
-            else
-                stype.Add("unit_type", 0);
-
-            jsonObject.Add("unit_prod", (JObject) stype); */
-
             return jsonObject;
         }
 
