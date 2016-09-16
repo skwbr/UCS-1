@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -89,16 +89,9 @@ namespace UCS.Logic
             m_vTimer = null;
         }
 
-        public int GetRemainingUpgradeSeconds()
-        {
-            return m_vTimer.GetRemainingSeconds(GetParent().GetLevel().GetTime());
-        }
+        public int GetRemainingUpgradeSeconds() => m_vTimer.GetRemainingSeconds(GetParent().GetLevel().GetTime());
 
-        public int GetTotalSeconds()
-        {
-            var currentLevel = GetParent().GetLevel().GetPlayerAvatar().GetUnitUpgradeLevel(m_vHeroData);
-            return m_vHeroData.GetUpgradeTime(currentLevel);
-        }
+        public int GetTotalSeconds() => m_vHeroData.GetUpgradeTime(GetParent().GetLevel().GetPlayerAvatar().GetUnitUpgradeLevel(m_vHeroData));
 
         public bool IsMaxLevel()
         {
@@ -108,10 +101,7 @@ namespace UCS.Logic
             return currentLevel >= maxLevel;
         }
 
-        public bool IsUpgrading()
-        {
-            return m_vTimer != null;
-        }
+        public bool IsUpgrading() => m_vTimer != null;
 
         public override void Load(JObject jsonObject)
         {
@@ -160,8 +150,7 @@ namespace UCS.Logic
                 GetParent().GetLevel().WorkerManager.AllocateWorker(GetParent());
                 m_vTimer = new Timer();
                 m_vTimer.StartTimer(GetTotalSeconds(), GetParent().GetLevel().GetTime());
-                m_vUpgradeLevelInProgress = GetParent().GetLevel().GetPlayerAvatar().GetUnitUpgradeLevel(m_vHeroData) +
-                                            1;
+                m_vUpgradeLevelInProgress = GetParent().GetLevel().GetPlayerAvatar().GetUnitUpgradeLevel(m_vHeroData) + 1;
                 //SetHeroState v27(v24, v26, 1);
                 //Not 100% done
             }
