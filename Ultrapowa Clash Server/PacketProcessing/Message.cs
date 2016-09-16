@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -138,25 +138,13 @@ namespace UCS.PacketProcessing
             }
         }
 
-        public byte[] GetData()
-        {
-            return m_vData;
-        }
+        public byte[] GetData() => m_vData;
 
-        public int GetLength()
-        {
-            return m_vLength;
-        }
+        public int GetLength() => m_vLength;
 
-        public ushort GetMessageType()
-        {
-            return m_vType;
-        }
+        public ushort GetMessageType() => m_vType;
 
-        public ushort GetMessageVersion()
-        {
-            return m_vMessageVersion;
-        }
+        public ushort GetMessageVersion() => m_vMessageVersion;
 
         public byte[] GetRawData()
         {
@@ -195,10 +183,6 @@ namespace UCS.PacketProcessing
             return hex.Replace("-", " ");
         }
 
-        public override string ToString()
-        {
-            return Encoding.UTF8.GetString(m_vData, 0, m_vLength);
-        }
-
+        public override string ToString() => Encoding.UTF8.GetString(m_vData, 0, m_vLength);
     }
 }
