@@ -30,7 +30,7 @@ namespace UCS.Logic
 
         #region Public Methods
 
-        public void Decode(CoCSharpPacketReader br)
+        public void Decode(BinaryReader br)
         {
             UnitData = (CombatItemData) br.ReadDataReference();
             Level = br.ReadInt32WithEndian();
