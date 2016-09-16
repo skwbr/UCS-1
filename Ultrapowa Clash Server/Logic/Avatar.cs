@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -40,19 +40,11 @@ namespace UCS.Logic
         protected List<DataSlot> m_vHeroHealth;
         protected List<DataSlot> m_vHeroState;
         protected List<DataSlot> m_vHeroUpgradeLevel;
-
         protected List<DataSlot> m_vResourceCaps;
-
-        //private int m_vRemainingShieldTime;
         protected List<DataSlot> m_vResources;
-
         protected List<DataSlot> m_vSpellCount;
         protected List<DataSlot> m_vSpellUpgradeLevel;
         protected List<DataSlot> m_vUnitCount;
-
-        //protected List<DataSlot> m_vNpcStars { get; set; }//a1 + 56
-        //protected List<DataSlot> m_vLootedNpcGold { get; set; }//a1 + 60
-        //protected List<DataSlot> m_vLootedNpcElixir { get; set; }//a1 + 64
         protected List<DataSlot> m_vUnitUpgradeLevel;
 
         #endregion Protected Fields
@@ -68,10 +60,7 @@ namespace UCS.Logic
 
         #region Public Methods
 
-        public static int GetDataIndex(List<DataSlot> dsl, Data d)
-        {
-            return dsl.FindIndex(ds => ds.Data == d);
-        }
+        public static int GetDataIndex(List<DataSlot> dsl, Data d) => dsl.FindIndex(ds => ds.Data == d);
 
         public void CommodityCountChangeHelper(int commodityType, Data data, int count)
         {
@@ -97,20 +86,11 @@ namespace UCS.Logic
             }
         }
 
-        public int GetAllianceCastleLevel()
-        {
-            return m_vCastleLevel;
-        }
+        public int GetAllianceCastleLevel() => m_vCastleLevel;
 
-        public int GetAllianceCastleTotalCapacity()
-        {
-            return m_vCastleTotalCapacity;
-        }
+        public int GetAllianceCastleTotalCapacity() => m_vCastleTotalCapacity;
 
-        public int GetAllianceCastleUsedCapacity()
-        {
-            return m_vCastleUsedCapacity;
-        }
+        public int GetAllianceCastleUsedCapacity() => m_vCastleUsedCapacity;
 
         public int GetResourceCap(ResourceData rd)
         {
@@ -121,10 +101,7 @@ namespace UCS.Logic
             return count;
         }
 
-        public List<DataSlot> GetResourceCaps()
-        {
-            return m_vResourceCaps;
-        }
+        public List<DataSlot> GetResourceCaps() => m_vResourceCaps;
 
         public int GetResourceCount(ResourceData rd)
         {
@@ -135,20 +112,11 @@ namespace UCS.Logic
             return count;
         }
 
-        public List<DataSlot> GetResources()
-        {
-            return m_vResources;
-        }
+        public List<DataSlot> GetResources() => m_vResources;
 
-        public List<DataSlot> GetSpells()
-        {
-            return m_vSpellCount;
-        }
+        public List<DataSlot> GetSpells() => m_vSpellCount;
 
-        public int GetTownHallLevel()
-        {
-            return m_vTownHallLevel;
-        }
+        public int GetTownHallLevel() => m_vTownHallLevel;
 
         public int GetUnitCount(CombatItemData cd)
         {
@@ -168,10 +136,7 @@ namespace UCS.Logic
             return result;
         }
 
-        public List<DataSlot> GetUnits()
-        {
-            return m_vUnitCount;
-        }
+        public List<DataSlot> GetUnits() => m_vUnitCount;
 
         public int GetUnitUpgradeLevel(CombatItemData cd)
         {
@@ -280,8 +245,6 @@ namespace UCS.Logic
             {
                 m_vResources[index].Value = value;
             }
-            //LogicLevel::getComponentManager(v18);
-            //LogicComponentManager::divideAvatarResourcesToStorages(v19)
         }
 
         public void SetTownHallLevel(int level)
