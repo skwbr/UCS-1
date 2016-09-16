@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -32,7 +32,6 @@ namespace UCS.Logic.StreamEntry
         long m_vHomeId;
         int m_vId;
         DateTime m_vMessageTime;
-        int m_vRole;
         long m_vSenderId;
         int m_vSenderLeagueId;
         int m_vSenderLevel;
@@ -47,7 +46,7 @@ namespace UCS.Logic.StreamEntry
         public virtual byte[] Encode()
         {
             var data = new List<byte>();
-            data.AddInt32(GetStreamEntryType()); //chatstreamentry
+            data.AddInt32(GetStreamEntryType());
             data.AddInt32(0);
             data.AddInt32(m_vId);
             data.Add(3);
@@ -61,51 +60,24 @@ namespace UCS.Logic.StreamEntry
             return data.ToArray();
         }
 
-        public int GetAgeSeconds()
-        {
-            return (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds -
-                   (int) m_vMessageTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-        }
+        public int GetAgeSeconds() => (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds -
+        (int)m_vMessageTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
 
-        public long GetHomeId()
-        {
-            return m_vHomeId;
-        }
+        public long GetHomeId() => m_vHomeId;
 
-        public int GetId()
-        {
-            return m_vId;
-        }
+        public int GetId() => m_vId;
 
-        public long GetSenderId()
-        {
-            return m_vSenderId;
-        }
+        public long GetSenderId() => m_vSenderId;
 
-        public int GetSenderLeagueId()
-        {
-            return m_vSenderLeagueId;
-        }
+        public int GetSenderLeagueId() => m_vSenderLeagueId;
 
-        public int GetSenderLevel()
-        {
-            return m_vSenderLevel;
-        }
+        public int GetSenderLevel() => m_vSenderLevel;
 
-        public string GetSenderName()
-        {
-            return m_vSenderName;
-        }
+        public string GetSenderName() => m_vSenderName;
 
-        public int GetSenderRole()
-        {
-            return m_vSenderRole;
-        }
+        public int GetSenderRole() => m_vSenderRole;
 
-        public virtual int GetStreamEntryType()
-        {
-            return m_vType;
-        }
+        public virtual int GetStreamEntryType() => m_vType;
 
         public virtual void Load(JObject jsonObject)
         {
