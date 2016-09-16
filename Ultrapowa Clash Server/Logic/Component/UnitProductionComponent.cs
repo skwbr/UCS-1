@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -32,10 +32,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 3; }
-        }
+        public override int Type => 3;
 
         #endregion Public Properties
 
@@ -74,13 +71,7 @@ namespace UCS.Logic
             }
         }
 
-        public bool CanAddUnitToQueue(CombatItemData cd)
-        {
-            //Console.WriteLine(GetMaxTrainCount());
-            //Console.WriteLine(GetTotalCount());
-            //Console.WriteLine(cd.GetHousingSpace());
-            return GetMaxTrainCount() >= GetTotalCount() + cd.GetHousingSpace();
-        }
+        public bool CanAddUnitToQueue(CombatItemData cd) => GetMaxTrainCount() >= GetTotalCount() + cd.GetHousingSpace();
 
         public CombatItemData GetCurrentlyTrainedUnit()
         {
@@ -97,10 +88,7 @@ namespace UCS.Logic
             return bd.GetUnitProduction(b.GetUpgradeLevel());
         }
 
-        public int GetSlotCount()
-        {
-            return m_vUnits.Count;
-        }
+        public int GetSlotCount() => m_vUnits.Count;
 
         public int GetTotalCount()
         {
@@ -151,15 +139,9 @@ namespace UCS.Logic
             return result;
         }
 
-        public int GetTrainingCount(int index)
-        {
-            return m_vUnits[index].Value;
-        }
+        public int GetTrainingCount(int index) => m_vUnits[index].Value;
 
-        public CombatItemData GetUnit(int index)
-        {
-            return (CombatItemData) m_vUnits[index].Data;
-        }
+        public CombatItemData GetUnit(int index) => (CombatItemData)m_vUnits[index].Data;
 
         public bool HasHousingSpaceForSpeedUp()
         {
@@ -178,10 +160,7 @@ namespace UCS.Logic
             return totalRoom <= maxHousing - usedHousing;
         }
 
-        public bool IsSpellForge()
-        {
-            return m_vIsSpellForge;
-        }
+        public bool IsSpellForge() => m_vIsSpellForge;
 
         public bool IsWaitingForSpace()
         {
@@ -225,8 +204,6 @@ namespace UCS.Logic
         public bool ProductionCompleted()
         {
             var result = false;
-            //localiser le camp le plus proche pour envoyer l'unit
-            //incrementer ce camp
             var cf = new ComponentFilter(0);
             var x = GetParent().X;
             var y = GetParent().Y;
@@ -240,7 +217,6 @@ namespace UCS.Logic
                     d = m_vUnits[0].Data;
                 if (!((UnitStorageComponent) c).CanAddUnit((CombatItemData) d))
                 {
-                    //Storage camp is full
                     cf.AddIgnoreObject(c.GetParent());
                     c = cm.GetClosestComponent(x, y, cf);
                 }
@@ -297,7 +273,6 @@ namespace UCS.Logic
 
         public override JObject Save(JObject jsonObject)
         {
-            //{"data":1000006,"lvl":3,"x":12,"y":34,"unit_prod":{"unit_type":0,"t":0,"slots":[{"id":4000000,"cnt":19}]}}
             var unitProdObject = new JObject();
             if (m_vIsSpellForge)
                 unitProdObject.Add("unit_type", 1);
