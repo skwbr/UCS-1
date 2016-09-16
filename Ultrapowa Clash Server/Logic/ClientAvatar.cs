@@ -32,7 +32,6 @@ namespace UCS.Logic
             while (!found)
             {
                 var league = (LeagueData) table.GetItemAt(i);
-
                 if (m_vScore <= league.BucketPlacementRangeHigh[league.BucketPlacementRangeHigh.Count - 1] &&
                     m_vScore >= league.BucketPlacementRangeLow[0])
                 {
@@ -148,7 +147,6 @@ namespace UCS.Logic
         {
             var rnd = new Random();
             var data = new List<byte>();
-
             data.AddInt32(0);
             data.AddInt64(m_vId);
             data.AddInt64(m_vCurrentHomeId);
@@ -163,7 +161,7 @@ namespace UCS.Logic
                 data.AddInt32(alliance.GetAllianceLevel());
             }
             data.Add(0);
-            //7.156
+
             if (m_vLeagueId == 22)
             {
                 data.AddInt32(m_vScore / 12); //Legend Trophies
@@ -204,7 +202,6 @@ namespace UCS.Logic
             }
 
             data.AddInt32(m_vLeagueId);
-
             data.AddInt32(GetAllianceCastleLevel());
             data.AddInt32(GetAllianceCastleTotalCapacity());
             data.AddInt32(GetAllianceCastleUsedCapacity());
@@ -220,7 +217,6 @@ namespace UCS.Logic
             data.AddInt32(1200);
             data.AddInt32(60);
             data.AddInt32(m_vScore);
-
             data.AddInt32(100); //Attack win
             data.AddInt32(1);
             data.AddInt32(100); //Attack loses
@@ -257,19 +253,17 @@ namespace UCS.Logic
             {
                 data.AddRange(BitConverter.GetBytes(u.Data.GetGlobalID()).Reverse());
                 data.AddRange(BitConverter.GetBytes(u.Value).Reverse());
-                data.AddRange(BitConverter.GetBytes(0).Reverse()); //A CHANGER
+                data.AddRange(BitConverter.GetBytes(0).Reverse()); 
             }
 
             data.AddRange(BitConverter.GetBytes(TutorialStepsCount).Reverse());
             for (uint i = 0; i < TutorialStepsCount; i++)
                 data.AddRange(BitConverter.GetBytes(0x01406F40 + i).Reverse());
 
-            //Unlocked Achievements
             data.AddRange(BitConverter.GetBytes(Achievements.Count).Reverse());
             foreach (var a in Achievements)
                 data.AddRange(BitConverter.GetBytes(a.Data.GetGlobalID()).Reverse());
 
-            //Achievement Progress
             data.AddRange(BitConverter.GetBytes(Achievements.Count).Reverse());
             foreach (var a in Achievements)
             {
@@ -277,7 +271,6 @@ namespace UCS.Logic
                 data.AddRange(BitConverter.GetBytes(0).Reverse()); //A CHANGER
             }
 
-            //NPC Star
             data.AddRange(BitConverter.GetBytes(ObjectManager.NpcLevels.Count).Reverse());
             {
                 for (var i = 17000000; i < 17000050; i++)
@@ -298,10 +291,7 @@ namespace UCS.Logic
             return data.ToArray();
         }
 
-        public long GetAllianceId()
-        {
-            return m_vAllianceId;
-        }
+        public long GetAllianceId() => m_vAllianceId;
 
         public AllianceMemberEntry GetAllianceMemberEntry()
         {
@@ -319,35 +309,17 @@ namespace UCS.Logic
             return -1;
         }
 
-        public int GetAvatarLevel()
-        {
-            return m_vAvatarLevel;
-        }
+        public int GetAvatarLevel() => m_vAvatarLevel;
 
-        public string GetAvatarName()
-        {
-            return m_vAvatarName;
-        }
+        public string GetAvatarName() => m_vAvatarName;
 
-        public long GetCurrentHomeId()
-        {
-            return m_vCurrentHomeId;
-        }
+        public long GetCurrentHomeId() => m_vCurrentHomeId;
 
-        public int GetDiamonds()
-        {
-            return m_vCurrentGems;
-        }
+        public int GetDiamonds() => m_vCurrentGems;
 
-        public long GetId()
-        {
-            return m_vId;
-        }
+        public long GetId() => m_vId;
 
-        public int GetLeagueId()
-        {
-            return m_vLeagueId;
-        }
+        public int GetLeagueId() => m_vLeagueId;
 
         public int GetScore()
         {
@@ -355,35 +327,19 @@ namespace UCS.Logic
             return m_vScore;
         }
 
-        public int GetSecondsFromLastUpdate()
-        {
-            return (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds - LastUpdate;
-        }
+        public int GetSecondsFromLastUpdate() => (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds - LastUpdate;
 
-        public string GetUserToken()
-        {
-            return m_vToken;
-        }
-        public string GetUserRegion()
-        {
-            return m_vRegion;
-        }
+        public string GetUserToken() => m_vToken;
 
+        public string GetUserRegion() => m_vRegion;
 
-        public bool HasEnoughDiamonds(int diamondCount)
-        {
-            return m_vCurrentGems >= diamondCount;
-        }
+        public bool HasEnoughDiamonds(int diamondCount) => m_vCurrentGems >= diamondCount;
 
-        public bool HasEnoughResources(ResourceData rd, int buildCost)
-        {
-            return GetResourceCount(rd) >= buildCost;
-        }
+        public bool HasEnoughResources(ResourceData rd, int buildCost) => GetResourceCount(rd) >= buildCost;
 
         public void LoadFromJSON(string jsonString)
         {
             var jsonObject = JObject.Parse(jsonString);
-
             m_vId = jsonObject["avatar_id"].ToObject<long>();
             m_vToken = jsonObject["token"].ToObject<string>();
             m_vRegion = jsonObject["region"].ToObject<string>();
@@ -400,14 +356,6 @@ namespace UCS.Logic
             SetScore(jsonObject["score"].ToObject<int>());
             m_vNameChangingLeft = jsonObject["nameChangesLeft"].ToObject<byte>();
             m_vnameChosenByUser = jsonObject["nameChosenByUser"].ToObject<byte>();
-
-            /*JArray jsonMaxResources = (JArray)jsonObject["max_resources"];
-            foreach (JObject resource in jsonMaxResources)
-            {
-                var ds = new DataSlot(null, 0);
-                ds.Load(resource);
-                m_vResourceCaps.Add(ds);
-            }*/
 
             var jsonResources = (JArray) jsonObject["resources"];
             foreach (JObject resource in jsonResources)
@@ -482,16 +430,6 @@ namespace UCS.Logic
             }
             TutorialStepsCount = jsonObject["tutorial_step"].ToObject<uint>();
 
-            /*
-            JArray jsonUnlockedAchievements = (JArray)jsonObject["unlocked_achievements"];
-            foreach (JObject data in jsonUnlockedAchievements)
-            {
-                var ds = new DataSlot(null, 0);
-                ds.Load(data);
-                AchievementsUnlocked.Add(ds);
-            }
-            */
-
             var jsonAchievementsProgress = (JArray) jsonObject["achievements_progress"];
             foreach (JObject data in jsonAchievementsProgress)
             {
@@ -528,7 +466,6 @@ namespace UCS.Logic
         public string SaveToJSON()
         {
             var jsonData = new JObject();
-
             jsonData.Add("avatar_id", m_vId);
             jsonData.Add("token", m_vToken);
             jsonData.Add("region", m_vRegion);
@@ -545,11 +482,6 @@ namespace UCS.Logic
             jsonData.Add("score", GetScore());
             jsonData.Add("nameChangesLeft", m_vNameChangingLeft);
             jsonData.Add("nameChosenByUser", (ushort) m_vnameChosenByUser);
-
-            /*JArray jsonResourceCapsArray = new JArray();
-            foreach (var resource in GetResourceCaps())
-                jsonResourceCapsArray.Add(resource.Save(new JObject()));
-            jsonData.Add("max_resources", jsonResourceCapsArray);*/
 
             var jsonResourcesArray = new JArray();
             foreach (var resource in GetResources())
@@ -597,17 +529,6 @@ namespace UCS.Logic
             jsonData.Add("alliance_units", jsonAllianceUnitsArray);
 
             jsonData.Add("tutorial_step", TutorialStepsCount);
-
-            /*
-            JArray jsonAchievementsArray = new JArray();
-            foreach (var achievement in Achievements)
-            {
-                JObject jsonObject = new JObject();
-                jsonObject.Add("global_id", achievement.Data.GetGlobalID());
-                jsonAchievementsArray.Add(jsonObject);
-            }
-            jsonData.Add("unlocked_achievements", jsonAchievementsArray);
-            */
 
             var jsonAchievementsProgressArray = new JArray();
             foreach (var achievement in Achievements)
