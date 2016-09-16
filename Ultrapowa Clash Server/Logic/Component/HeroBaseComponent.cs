@@ -30,10 +30,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 10; }
-        }
+        public override int Type => 10;
 
         #endregion Public Properties
 
