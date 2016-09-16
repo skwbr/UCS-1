@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Program : Ultrapowa Clash Server
  * Description : A C# Writted 'Clash of Clans' Server Emulator !
  *
@@ -30,10 +30,7 @@ namespace UCS.Logic
 
         #region Public Properties
 
-        public override int Type
-        {
-            get { return 9; }
-        }
+        public override int Type => 9;
 
         #endregion Public Properties
 
@@ -83,10 +80,7 @@ namespace UCS.Logic
             m_vCurrentlyUpgradedUnit = null;
         }
 
-        public CombatItemData GetCurrentlyUpgradedUnit()
-        {
-            return m_vCurrentlyUpgradedUnit;
-        }
+        public CombatItemData GetCurrentlyUpgradedUnit() => m_vCurrentlyUpgradedUnit;
 
         public int GetRemainingSeconds()
         {
@@ -126,8 +120,6 @@ namespace UCS.Logic
 
         public override JObject Save(JObject jsonObject)
         {
-            //{"data":1000007,"lvl":7,"x":4,"y":4,"unit_upg":{"unit_type":0,"t":591612,"id":4000001},"l1x":32,"l1y":32}
-
             if (m_vCurrentlyUpgradedUnit != null)
             {
                 var unitUpgradeObject = new JObject();
